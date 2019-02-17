@@ -57,7 +57,7 @@
 % changes the colors of your current slide theme.
 
 %\usecolortheme{albatross}
-%\usecolortheme{beaver}
+\usecolortheme{beaver}
 %\usecolortheme{beetle}
 %\usecolortheme{crane}
 %\usecolortheme{dolphin}
@@ -285,7 +285,7 @@ University of Wisconsin, Madison \\ % Your institution for the title page
         \label{eq:4}
         \frac{\partial F}{\partial I}
         -\frac{d}{dx}\frac{\partial F}{\partial I_x}
-        -\frac{d}{dx}\frac{\partial F}{\partial I_y}=0, 
+        -\frac{d}{dy}\frac{\partial F}{\partial I_y}=0, 
         \quad (x,y) \in \Omega 
     \end{equation}
 \end{frame} 
@@ -345,7 +345,7 @@ University of Wisconsin, Madison \\ % Your institution for the title page
 \begin{frame}
     \frametitle{Discrete Poisson solver}
     \begin{itemize}    
-        \item Each pixel $p=(x,y)$ in $Omega$ generates a linear equation for unknown values in $I(x,y)$    
+        \item Each pixel $p=(x,y)$ in $\Omega$ generates a linear equation for unknown values in $I(x,y)$    
         \begin{item} 
             Two cases, for the 4-neighborhood $N(p)$: 
             \begin{figure}[!ht]
@@ -360,7 +360,7 @@ University of Wisconsin, Madison \\ % Your institution for the title page
     \frametitle{Discrete Poisson solver}    
         \begin{enumerate}
             \item $N(p) \in \Omega$ The neighborhoods of $p$ are fully contained in $\Omega$ and the Laplacian: 
-            $I(x+1,y)+I(x-1,y)+I(x,y+1)+I(x,y-1)-4S(x,y)=S(x+1,y)+S(x-1,y)+S(x,y+1)+S(x,y-1)-4S(x,y)$
+            $I(x+1,y)+I(x-1,y)+I(x,y+1)+I(x,y-1)-4I(x,y)=S(x+1,y)+S(x-1,y)+S(x,y+1)+S(x,y-1)-4S(x,y)$
             \item $N(p) \notin \Omega$ Not all neighborhoods of $p$ are contained in $\Omega$, at least one neighborhood is in $\partial \Omega$:
             \[
                 \begin{split}
@@ -383,11 +383,11 @@ University of Wisconsin, Madison \\ % Your institution for the title page
         1 & 1 & -4 & 1 &  1  & \cdots & \cdots & \cdots &  0\\
         0 & 1 & 1 & -4 & 1 & 1 & \cdots & \cdots & 0 \\
         0 & 0 & 1 & 1 & -4 & 1 & 1 & \cdots & 0 \\
-        \vdots &  &  &  &  &  &  & \cdots &  0 \\
-        \vdots &  &  &  &  &  &  & \cdots &  0 \\
-        \vdots &  &  &  &  &  &  & \cdots &  0 \\
-        \vdots &  &  &  &  &  &  & \cdots &  0 \\
-        \vdots &  &  &  &  &  &  & \ddots &  \vdots \\
+        \vdots &  &  &  &  &  &  &  &  \vdots \\
+        \vdots &  &  &  &  &  &  &  &  \vdots \\
+        \vdots &  &  &  &  &  &  &  &  \vdots \\
+        0 &  &  &  &  &  &  &  &  0 \\
+        \vdots &  &  &  &  &  &  &  &  \vdots \\
         0 & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & 1 \\
         \end{pmatrix}
         \begin{pmatrix}
